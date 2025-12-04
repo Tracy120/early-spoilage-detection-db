@@ -2,6 +2,15 @@
 
 ## Project Overview
 
+Early Spoilage Detection System Database (ESDS-DB) is a backend Oracle PL/SQL system designed to securely manage and monitor sensor data related to food spoilage conditions. The project ensures that only valid, permitted sensor operations are executed and that all data changes are fully audited for accountability.
+
+# PHASE II: Business Process Modeling
+
+![Created tables](screenshots/BPRN.png)
+
+# PHASE III: Logical Model Design
+
+![Created tables](screenshots/ERD.png)
 
 
 # PHASE IV – Database Creation for Early Spoilage Detection System.

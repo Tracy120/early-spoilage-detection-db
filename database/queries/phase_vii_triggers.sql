@@ -1,9 +1,16 @@
-CREATE TABLE holidays (
-    holiday_date DATE PRIMARY KEY,
-    description VARCHAR2(100)
-);
+-- 7. Test queries
 
--- Sample holidays
-INSERT INTO holidays (holiday_date, description) VALUES (TO_DATE('2026-01-01', 'YYYY-MM-DD'), 'New Year');
-INSERT INTO holidays (holiday_date, description) VALUES (TO_DATE('2026-01-20', 'YYYY-MM-DD'), 'Public Holiday');
-COMMIT;
+-- Attempt an insert (this may fail if today is weekday/holiday)
+BEGIN
+    INSERT INTO SENSOR(sensor_type, location) VALUES ('Temperature', 'Warehouse');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END;
+/
+
+-- Check audit log
+SELECT * FROM AUDIT_LOG ORDER BY action_date DESC;
+
+-- Check SENSOR table
+SELECT * FROM SENSOR;
