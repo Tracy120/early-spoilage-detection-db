@@ -1,6 +1,9 @@
 # EarlySpoilageDetectionSystem_DB
 
 ## Project Overview
+
+
+
 # PHASE IV – Database Creation for Early Spoilage Detection System.
 
 ## Database Setup
@@ -11,13 +14,6 @@
 - Tablespaces: data_ts, index_ts, temp_ts
 - Archive Logging: Enabled at CDB level
 
-## Scripts
-- database/scripts/phase_iv_complete.sql
-
-## Documentation
-- In details :
-- pdb_setup.md
-- tablespace_setup.md
 
 # EarlySpoilageDetectionSystem – PHASE V: Table Implementation & Data Insertion
 
@@ -107,3 +103,75 @@ GROUP BY sensor_id;
 SELECT product_name, expiry_date
 FROM product
 WHERE expiry_date < SYSDATE + 10;
+
+
+# PHASE VI – Database Interaction & Transactions
+
+## Objective
+Develop PL/SQL procedures, functions, cursors, window functions, and packages to interact with the database, enforce business rules, and perform data operations.
+
+---
+
+## Overview
+
+This phase focuses on:
+
+- **Procedures** – automate insert, update, and delete operations.
+- **Functions** – calculate values, validate data, and retrieve information.
+- **Packages** – group related procedures and functions for modularity.
+- **Cursors** – process multiple rows efficiently.
+- **Window Functions** – analyze trends and ranking within datasets.
+- **Testing** – verify outputs, edge cases, and performance.
+
+---
+
+## Scripts Implemented
+
+### Procedures
+| Procedure | Purpose | Test Output |
+|-----------|---------|-------------|
+| `add_sensor` | Adds a new sensor record with specified type and location. | Prints new Sensor ID |
+| `update_product_expiry` | Updates expiry date of a product | Confirmation message |
+| `delete_measurement` | Deletes a measurement record by ID | Confirms deletion or “not found” |
+
+### Functions
+| Function | Purpose | Test Output |
+|----------|---------|-------------|
+| `calc_spoilage_index` | Calculates spoilage index | Numeric value |
+| `is_product_expired` | Checks if a product is expired | `EXPIRED` / `NOT EXPIRED` |
+| `lookup_sensor_by_location` | Retrieves sensor ID for a given location | Sensor ID or NULL |
+
+### Package (`product_pkg`)
+- **Procedures:** `update_expiry` – updates product expiry date  
+- **Functions:** `check_expiry` – returns product expiry status  
+
+### Cursors
+- `c_temp_high` – loops through all measurements with temperature > 25  
+- Outputs sensor ID and temperature for each row  
+
+### Window Functions
+- `ROW_NUMBER()`, `LAG()`, `LEAD()`  
+- Partitioned by sensor, ordered by measurement date  
+- Analyzes trends and previous/next temperature values  
+
+---
+
+## Testing & Output
+
+- All objects tested using `plsql_test_queries.sql`.  
+- **Procedures**: Insert, update, delete operations confirmed via DBMS_OUTPUT.  
+- **Functions**: Outputs verified via SELECT statements.  
+- **Package**: Procedures and functions called successfully.  
+- **Cursor & Window Functions**: Verified multi-row processing and trend analysis.
+
+**Sample Output:**
+
+![Procedures Output](screenshots/test%20procedures.png)
+
+![Functions Output](screenshots/test%20functions.png)
+
+![Packages Output](screenshots/test%20packages.png)
+
+![Validation Output](screenshots/test%20validation.png)
+
+![Testing Output](screenshots/output.png)
