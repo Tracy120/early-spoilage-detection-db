@@ -184,3 +184,6 @@ Implement triggers, business rules, and comprehensive auditing for the Early Spo
 ```sql
 INSERT INTO HOLIDAYS (holiday_date, description)
 VALUES (TO_DATE('2025-12-25', 'YYYY-MM-DD'), 'Christmas Day');
+
+
+![Error weekends](screenshots/error%20trigger.png)
