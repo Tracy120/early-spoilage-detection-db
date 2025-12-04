@@ -158,3 +158,29 @@ This phase focuses on:
 ![Validation Output](screenshots/test%20validation.png)
 
 ![Testing Output](screenshots/output.png)
+
+# PHASE VII: Advanced Programming & Auditing
+
+## Objective
+Implement triggers, business rules, and comprehensive auditing for the Early Spoilage Detection System. Ensure database actions are monitored, restricted based on business rules, and all attempts are logged.
+
+---
+
+## Business Rule Implemented
+- Employees **cannot INSERT/UPDATE/DELETE** on:
+  - **Weekdays (Monday–Friday)**
+  - **Public Holidays** (only upcoming month)
+- All attempts, whether allowed or denied, are **recorded in an audit log**.
+
+---
+
+## Components Developed
+
+### 1. Holiday Management
+- Table: `HOLIDAYS`
+- Stores dates of public holidays for the current month.
+- Example insert:
+
+```sql
+INSERT INTO HOLIDAYS (holiday_date, description)
+VALUES (TO_DATE('2025-12-25', 'YYYY-MM-DD'), 'Christmas Day');
